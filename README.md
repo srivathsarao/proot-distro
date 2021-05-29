@@ -17,7 +17,7 @@ Install package in Termux:
 ```
 pkg update -y && pkg upgrade -y
 pkg install git wget -y
-git clone git://github.com/modded-ubuntu/modded-ubuntu.git
+git clone git://github.com/srivathsarao/proot-distro.git
 cd proot-distro
 ./install.sh
 ```
