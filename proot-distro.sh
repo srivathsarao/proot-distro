@@ -261,7 +261,6 @@ command_install() {
 		# and further post-installation configuration.
 		source "${distro_plugin_script}"
 
-		local integrity_sha256
 		local download_url
 		if declare -f -F get_download_url >/dev/null 2>&1; then
 			download_url=$(get_download_url | cut -d'|' -f2-)
@@ -305,20 +304,6 @@ command_install() {
 			mv -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp" "${DOWNLOAD_CACHE_DIR}/${tarball_name}"
 		else
 			msg "${BLUE}[${GREEN}*${BLUE}] ${CYAN}Using cached rootfs tarball...${RST}"
-		fi
-
-		if [ -n "${integrity_sha256}" ]; then
-			msg "${BLUE}[${GREEN}*${BLUE}] ${CYAN}Checking integrity, please wait...${RST}"
-			local actual_sha256
-			actual_sha256=$(sha256sum "${DOWNLOAD_CACHE_DIR}/${tarball_name}" | awk '{ print $1}')
-
-			if [ "${integrity_sha256}" != "${actual_sha256}" ]; then
-				msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Integrity checking failed. Try to redo installation again.${RST}"
-				rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}"
-				return 1
-			fi
-		else
-			msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Integrity checking of downloaded rootfs has been disabled.${RST}"
 		fi
 
 		msg "${BLUE}[${GREEN}*${BLUE}] ${CYAN}Extracting rootfs, please wait...${RST}"
