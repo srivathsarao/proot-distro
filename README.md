@@ -1,4 +1,5 @@
-A Bash script for managing proot'ed Linux distributions in Termux.
+A Modded Bash script for managing proot'ed Linux distributions in Termux. Addition of Ubuntu 21.04.
+Please Uninstall existing proot-distro using "pkg uninstall proot-distro"
 
 For now it supports installation of these distributions:
 
@@ -8,13 +9,17 @@ For now it supports installation of these distributions:
 * Fedora 33
 * Kali Nethunter (rootless)
 * Parrot OS (LTS)
-* Ubuntu (18.04 / 20.04)
+* Ubuntu (18.04 / 20.04 / 21.04)
 
 ## Usage example
 
 Install package in Termux:
 ```
-pkg install proot-distro
+pkg update -y && pkg upgrade -y
+pkg install git wget -y
+git clone git://github.com/modded-ubuntu/modded-ubuntu.git
+cd proot-distro
+./install.sh
 ```
 
 Example on how to install Ubuntu and launch shell:
